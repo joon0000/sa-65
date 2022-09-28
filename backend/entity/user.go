@@ -1,8 +1,6 @@
 package entity
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
@@ -36,11 +34,8 @@ type MemberClass struct {
 }
 
 type USER struct {
-	//gorm.Model
-	USER_ID   string `gorm:"primaryKey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	gorm.Model
+	PIN       string `gorm:"uniqueIndex"`
 	FirstName string
 	LastName  string
 	CIV       string `gorm:"uniqueIndex"`
