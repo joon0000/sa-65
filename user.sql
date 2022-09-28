@@ -37,10 +37,11 @@ CREATE TABLE IF NOT EXISTS "member_classes" (
 	PRIMARY KEY("id")
 );
 CREATE TABLE IF NOT EXISTS "users" (
-	"user_id"	text,
+	"id"	integer,
 	"created_at"	datetime,
 	"updated_at"	datetime,
 	"deleted_at"	datetime,
+	"pin"	text,
 	"first_name"	text,
 	"last_name"	text,
 	"civ"	text,
@@ -52,11 +53,11 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"role_id"	integer,
 	"province_id"	integer,
 	"member_class_id"	integer,
-	PRIMARY KEY("user_id"),
-	CONSTRAINT "fk_provinces_users" FOREIGN KEY("province_id") REFERENCES "provinces"("id"),
+	PRIMARY KEY("id"),
 	CONSTRAINT "fk_roles_users" FOREIGN KEY("role_id") REFERENCES "roles"("id"),
 	CONSTRAINT "fk_member_classes_users" FOREIGN KEY("member_class_id") REFERENCES "member_classes"("id"),
-	CONSTRAINT "fk_employees_users" FOREIGN KEY("emp_id") REFERENCES "employees"("id")
+	CONSTRAINT "fk_employees_users" FOREIGN KEY("emp_id") REFERENCES "employees"("id"),
+	CONSTRAINT "fk_provinces_users" FOREIGN KEY("province_id") REFERENCES "provinces"("id")
 );
 CREATE INDEX IF NOT EXISTS "idx_employees_deleted_at" ON "employees" (
 	"deleted_at"
@@ -78,5 +79,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS "idx_users_email" ON "users" (
 );
 CREATE UNIQUE INDEX IF NOT EXISTS "idx_users_civ" ON "users" (
 	"civ"
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "idx_users_pin" ON "users" (
+	"pin"
 );
 COMMIT;
