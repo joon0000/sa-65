@@ -9,7 +9,7 @@ type EMPLOYEE struct {
 	gorm.Model
 	NAME     string
 	PASSWORD string
-	USERS    []USER `gorm:"foreignKey:EmpID"`
+	USERS    []USER `gorm:"foreignKey:EmployeeID"`
 }
 
 type ROLE struct {
@@ -45,7 +45,7 @@ type USER struct {
 	PASSWORD  string
 	ADDRESS   string
 	//FK
-	EmpID         *uint
+	EmployeeID    *uint
 	RoleID        *uint
 	ProvinceID    *uint
 	MemberClassID *uint

@@ -8,7 +8,7 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /users
+// POST /user
 func CreateUser(c *gin.Context) {
 	var user entity.USER
 	var employee entity.EMPLOYEE
@@ -23,7 +23,7 @@ func CreateUser(c *gin.Context) {
 	}
 
 	// 9: ค้นหา employee ด้วย id
-	if tx := entity.DB().Where("id = ?", user.EmpID).First(&employee); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", user.EmployeeID).First(&employee); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
 		return
 	}
@@ -91,7 +91,7 @@ func ListUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": users})
 }
 
-// DELETE /users/:id
+// DELETE /user/:id
 func DeleteUser(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM user WHERE id = ?", id); tx.RowsAffected == 0 {
