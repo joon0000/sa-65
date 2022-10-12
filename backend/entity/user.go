@@ -9,7 +9,7 @@ type EMPLOYEE struct {
 	gorm.Model
 	NAME     string
 	PASSWORD string
-	USERS    []USER `gorm:"foreignKey:empID"`
+	USERS    []USER `gorm:"foreignKey:EmpID"`
 }
 
 type ROLE struct {
@@ -18,20 +18,20 @@ type ROLE struct {
 	BORROW_DAY  int
 	BOOKROOM_HR int
 	BOOKCOM_HR  int
-	USERS       []USER `gorm:"foreignKey:roleID"`
+	USERS       []USER `gorm:"foreignKey:RoleID"`
 }
 
 type PROVINCE struct {
 	gorm.Model
 	NAME  string
-	USERS []USER `gorm:"foreignKey:provinceID"`
+	USERS []USER `gorm:"foreignKey:ProvinceID"`
 }
 
 type MemberClass struct {
 	gorm.Model
 	NAME     string
 	DISCOUNT string
-	USERS    []USER `gorm:"foreignKey:memberclassID"`
+	USERS    []USER `gorm:"foreignKey:MemberClassID"`
 }
 
 type USER struct {
@@ -45,10 +45,10 @@ type USER struct {
 	PASSWORD  string
 	ADDRESS   string
 	//FK
-	empID         *uint
-	roleID        *uint
-	provinceID    *uint
-	memberclassID *uint
+	EmpID         *uint
+	RoleID        *uint
+	ProvinceID    *uint
+	MemberClassID *uint
 	//JOIN
 	PROVINCE    PROVINCE
 	ROLE        ROLE
