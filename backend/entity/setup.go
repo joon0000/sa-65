@@ -24,10 +24,6 @@ func SetupDatabase() {
 		&PROVINCE{},
 		&MemberClass{},
 		&USER{},
-		/*&Employee{},
-		&Book{},
-		&Book_type{},
-		&Shelf{},*/
 	)
 
 	db = database

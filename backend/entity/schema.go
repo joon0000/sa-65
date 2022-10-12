@@ -53,5 +53,5 @@ type USER struct {
 	PROVINCE    PROVINCE
 	ROLE        ROLE
 	MemberClass MemberClass
-	EMP         EMPLOYEE
+	EMPLOYEE    EMPLOYEE
 }

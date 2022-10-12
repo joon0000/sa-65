@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS "roles" (
 	"bookcom_hr"	integer,
 	PRIMARY KEY("id")
 );
-CREATE TABLE IF NOT EXISTS "provinces" (
+CREATE TABLE IF NOT EXISTS "roles" (
 	"id"	integer,
 	"created_at"	datetime,
 	"updated_at"	datetime,
@@ -51,13 +51,13 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"address"	text,
 	"emp_id"	integer,
 	"role_id"	integer,
-	"province_id"	integer,
+	"role_id"	integer,
 	"member_class_id"	integer,
 	PRIMARY KEY("id"),
 	CONSTRAINT "fk_roles_users" FOREIGN KEY("role_id") REFERENCES "roles"("id"),
 	CONSTRAINT "fk_member_classes_users" FOREIGN KEY("member_class_id") REFERENCES "member_classes"("id"),
 	CONSTRAINT "fk_employees_users" FOREIGN KEY("emp_id") REFERENCES "employees"("id"),
-	CONSTRAINT "fk_provinces_users" FOREIGN KEY("province_id") REFERENCES "provinces"("id")
+	CONSTRAINT "fk_roles_users" FOREIGN KEY("role_id") REFERENCES "roles"("id")
 );
 CREATE INDEX IF NOT EXISTS "idx_employees_deleted_at" ON "employees" (
 	"deleted_at"
@@ -65,7 +65,7 @@ CREATE INDEX IF NOT EXISTS "idx_employees_deleted_at" ON "employees" (
 CREATE INDEX IF NOT EXISTS "idx_roles_deleted_at" ON "roles" (
 	"deleted_at"
 );
-CREATE INDEX IF NOT EXISTS "idx_provinces_deleted_at" ON "provinces" (
+CREATE INDEX IF NOT EXISTS "idx_roles_deleted_at" ON "roles" (
 	"deleted_at"
 );
 CREATE INDEX IF NOT EXISTS "idx_member_classes_deleted_at" ON "member_classes" (
