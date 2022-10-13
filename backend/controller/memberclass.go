@@ -7,7 +7,7 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /memberclass
+// POST /memberclasses
 func CreateMemberClass(c *gin.Context) {
 	var memberclass entity.MemberClass
 	if err := c.ShouldBindJSON(&memberclass); err != nil {
@@ -34,7 +34,7 @@ func GetMemberClass(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": memberclass})
 }
 
-// GET /memberclass
+// GET /memberclasses
 func ListMemberClass(c *gin.Context) {
 	var memberclass []entity.MemberClass
 	if err := entity.DB().Raw("SELECT * FROM memberclass").Scan(&memberclass).Error; err != nil {
@@ -45,7 +45,7 @@ func ListMemberClass(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": memberclass})
 }
 
-// DELETE /memberclass/:id
+// DELETE /memberclasses/:id
 func DeleteMemberClass(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM memberclass WHERE id = ?", id); tx.RowsAffected == 0 {
@@ -56,8 +56,8 @@ func DeleteMemberClass(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /memberclass
-func Updatememberclass(c *gin.Context) {
+// PATCH /memberclasses
+func UpdateMemberclass(c *gin.Context) {
 	var memberclass entity.MemberClass
 	if err := c.ShouldBindJSON(&memberclass); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

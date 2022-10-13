@@ -45,7 +45,7 @@ func ListEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// DELETE /employee/:id
+// DELETE /employees/:id
 func DeleteEmployee(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM employee WHERE id = ?", id); tx.RowsAffected == 0 {

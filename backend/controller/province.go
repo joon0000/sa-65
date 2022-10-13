@@ -7,7 +7,7 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /province
+// POST /provinces
 func CreateProvince(c *gin.Context) {
 	var province entity.PROVINCE
 	if err := c.ShouldBindJSON(&province); err != nil {
@@ -34,7 +34,7 @@ func GetProvince(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": province})
 }
 
-// GET /province
+// GET /provinces
 func ListProvince(c *gin.Context) {
 	var province []entity.USER
 	if err := entity.DB().Raw("SELECT * FROM province").Scan(&province).Error; err != nil {
@@ -45,7 +45,7 @@ func ListProvince(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": province})
 }
 
-// DELETE /province/:id
+// DELETE /provinces/:id
 func DeleteProvince(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM province WHERE id = ?", id); tx.RowsAffected == 0 {
@@ -56,7 +56,7 @@ func DeleteProvince(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /province
+// PATCH /provinces
 func UpdateProvince(c *gin.Context) {
 	var province entity.PROVINCE
 	if err := c.ShouldBindJSON(&province); err != nil {
