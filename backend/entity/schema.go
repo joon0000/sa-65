@@ -5,36 +5,36 @@ import (
 	//"time"
 )
 
-type EMPLOYEE struct {
+type Employee struct {
 	gorm.Model
 	NAME     string
 	PASSWORD string
-	USERS    []USER `gorm:"foreignKey:EmployeeID"`
+	USERS    []User `gorm:"foreignKey:EmployeeID"`
 }
 
-type ROLE struct {
+type Role struct {
 	gorm.Model
 	NAME        string
 	BORROW_DAY  int
 	BOOKROOM_HR int
 	BOOKCOM_HR  int
-	USERS       []USER `gorm:"foreignKey:RoleID"`
+	USERS       []User `gorm:"foreignKey:RoleID"`
 }
 
-type PROVINCE struct {
+type Province struct {
 	gorm.Model
 	NAME  string
-	USERS []USER `gorm:"foreignKey:ProvinceID"`
+	USERS []User `gorm:"foreignKey:ProvinceID"`
 }
 
 type MemberClass struct {
 	gorm.Model
 	NAME     string
 	DISCOUNT string
-	USERS    []USER `gorm:"foreignKey:MemberClassID"`
+	USERS    []User `gorm:"foreignKey:MemberClassID"`
 }
 
-type USER struct {
+type User struct {
 	gorm.Model
 	PIN       string `gorm:"uniqueIndex"`
 	FirstName string
@@ -50,8 +50,8 @@ type USER struct {
 	ProvinceID    *uint
 	MemberClassID *uint
 	//JOIN
-	PROVINCE    PROVINCE
-	ROLE        ROLE
+	Province    Province
+	Role        Role
 	MemberClass MemberClass
-	EMPLOYEE    EMPLOYEE
+	Employee    Employee
 }
