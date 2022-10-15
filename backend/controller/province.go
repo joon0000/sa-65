@@ -9,7 +9,7 @@ import (
 
 // POST /provinces
 func CreateProvince(c *gin.Context) {
-	var province entity.PROVINCE
+	var province entity.Province
 	if err := c.ShouldBindJSON(&province); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -24,9 +24,9 @@ func CreateProvince(c *gin.Context) {
 
 // GET /province/:id
 func GetProvince(c *gin.Context) {
-	var province entity.PROVINCE
+	var province entity.Province
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM province WHERE id = ?", id).Scan(&province).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM Province WHERE id = ?", id).Scan(&province).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -36,8 +36,8 @@ func GetProvince(c *gin.Context) {
 
 // GET /provinces
 func ListProvince(c *gin.Context) {
-	var province []entity.USER
-	if err := entity.DB().Raw("SELECT * FROM province").Scan(&province).Error; err != nil {
+	var province []entity.Province
+	if err := entity.DB().Raw("SELECT * FROM Province").Scan(&province).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -48,8 +48,8 @@ func ListProvince(c *gin.Context) {
 // DELETE /provinces/:id
 func DeleteProvince(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM province WHERE id = ?", id); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "province not found"})
+	if tx := entity.DB().Exec("DELETE FROM Province WHERE id = ?", id); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Province not found"})
 		return
 	}
 
@@ -58,14 +58,14 @@ func DeleteProvince(c *gin.Context) {
 
 // PATCH /provinces
 func UpdateProvince(c *gin.Context) {
-	var province entity.PROVINCE
+	var province entity.Province
 	if err := c.ShouldBindJSON(&province); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	if tx := entity.DB().Where("id = ?", province.ID).First(&province); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "province not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Province not found"})
 		return
 	}
 

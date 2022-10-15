@@ -10,11 +10,11 @@ import (
 
 // POST /user
 func CreateUser(c *gin.Context) {
-	var user entity.USER
-	var employee entity.EMPLOYEE
+	var user entity.User
+	var employee entity.Employee
 	var memberclass entity.MemberClass
-	var province entity.PROVINCE
-	var role entity.ROLE
+	var province entity.Province
+	var role entity.Role
 
 	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 8 จะถูก bind เข้าตัวแปร user
 	if err := c.ShouldBindJSON(&user); err != nil {
@@ -47,11 +47,11 @@ func CreateUser(c *gin.Context) {
 	}
 
 	// 12: สร้าง user
-	us := entity.USER{
-		EMPLOYEE:    employee,
+	us := entity.User{
+		Employee:    employee,
 		MemberClass: memberclass,
-		PROVINCE:    province,
-		ROLE:        role,
+		Province:    province,
+		Role:        role,
 	}
 
 	// ขั้นตอนการ validate ที่นำมาจาก unit test
@@ -70,7 +70,7 @@ func CreateUser(c *gin.Context) {
 
 // GET /user/:id
 func GetUser(c *gin.Context) {
-	var user entity.USER
+	var user entity.User
 	id := c.Param("id")
 	if err := entity.DB().Raw("SELECT * FROM user WHERE id = ?", id).Scan(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -82,7 +82,7 @@ func GetUser(c *gin.Context) {
 
 // GET /users
 func ListUser(c *gin.Context) {
-	var users []entity.USER
+	var users []entity.User
 	if err := entity.DB().Raw("SELECT * FROM user").Scan(&users).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -104,7 +104,7 @@ func DeleteUser(c *gin.Context) {
 
 // PATCH /users
 func UpdateUser(c *gin.Context) {
-	var user entity.USER
+	var user entity.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

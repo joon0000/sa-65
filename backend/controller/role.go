@@ -9,7 +9,7 @@ import (
 
 // POST /role
 func CreateRole(c *gin.Context) {
-	var role entity.ROLE
+	var role entity.Role
 	if err := c.ShouldBindJSON(&role); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -24,7 +24,7 @@ func CreateRole(c *gin.Context) {
 
 // GET /role/:id
 func GetRole(c *gin.Context) {
-	var role entity.ROLE
+	var role entity.Role
 	id := c.Param("id")
 	if err := entity.DB().Raw("SELECT * FROM role WHERE id = ?", id).Scan(&role).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -36,7 +36,7 @@ func GetRole(c *gin.Context) {
 
 // GET /role
 func ListRole(c *gin.Context) {
-	var role []entity.ROLE
+	var role []entity.Role
 	if err := entity.DB().Raw("SELECT * FROM role").Scan(&role).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -58,7 +58,7 @@ func DeleteRole(c *gin.Context) {
 
 // PATCH /role
 func UpdateRole(c *gin.Context) {
-	var role entity.ROLE
+	var role entity.Role
 	if err := c.ShouldBindJSON(&role); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

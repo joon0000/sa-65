@@ -19,11 +19,11 @@ func SetupDatabase() {
 
 	// Migrate the schema
 	database.AutoMigrate(
-		&EMPLOYEE{},
-		&ROLE{},
-		&PROVINCE{},
+		&Employee{},
+		&Role{},
+		&Province{},
 		&MemberClass{},
-		&USER{},
+		&User{},
 	)
 
 	db = database

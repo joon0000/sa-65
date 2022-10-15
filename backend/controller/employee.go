@@ -7,9 +7,9 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /employee
+// POST /Employee
 func CreateEmployee(c *gin.Context) {
-	var employee entity.EMPLOYEE
+	var employee entity.Employee
 	if err := c.ShouldBindJSON(&employee); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -22,11 +22,11 @@ func CreateEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// GET /employee/:id
+// GET /Employee/:id
 func GetEmployee(c *gin.Context) {
-	var employee entity.EMPLOYEE
+	var employee entity.Employee
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM employee WHERE id = ?", id).Scan(&employee).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM Employee WHERE id = ?", id).Scan(&employee).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -34,10 +34,10 @@ func GetEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// GET /employee
+// GET /Employee
 func ListEmployee(c *gin.Context) {
-	var employee []entity.EMPLOYEE
-	if err := entity.DB().Raw("SELECT * FROM employee").Scan(&employee).Error; err != nil {
+	var employee []entity.Employee
+	if err := entity.DB().Raw("SELECT * FROM Employee").Scan(&employee).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -45,27 +45,27 @@ func ListEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// DELETE /employees/:id
+// DELETE /Employees/:id
 func DeleteEmployee(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM employee WHERE id = ?", id); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
+	if tx := entity.DB().Exec("DELETE FROM Employee WHERE id = ?", id); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Employee not found"})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /employee
+// PATCH /Employee
 func UpdateEmployee(c *gin.Context) {
-	var employee entity.EMPLOYEE
+	var employee entity.Employee
 	if err := c.ShouldBindJSON(&employee); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	if tx := entity.DB().Where("id = ?", employee.ID).First(&employee); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Employee not found"})
 		return
 	}
 
