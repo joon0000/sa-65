@@ -30,7 +30,7 @@ type Province struct {
 type MemberClass struct {
 	gorm.Model
 	NAME     string
-	DISCOUNT string
+	DISCOUNT int
 	USERS    []User `gorm:"foreignKey:MemberClassID"`
 }
 
