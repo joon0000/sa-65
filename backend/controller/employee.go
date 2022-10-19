@@ -19,7 +19,7 @@ func GetEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// GET /Employees
+// GET /employees
 func ListEmployee(c *gin.Context) {
 	var employee []entity.Employee
 	if err := entity.DB().Raw("SELECT * FROM Employees").Scan(&employee).Error; err != nil {
@@ -30,7 +30,7 @@ func ListEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": employee})
 }
 
-// DELETE /Employees/:id
+// DELETE /employees/:id
 func DeleteEmployee(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM Employees WHERE id = ?", id); tx.RowsAffected == 0 {
@@ -41,7 +41,7 @@ func DeleteEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": id})
 }
 
-// PATCH /Employee
+// PATCH /employees
 func UpdateEmployee(c *gin.Context) {
 	var employee entity.Employee
 	if err := c.ShouldBindJSON(&employee); err != nil {
