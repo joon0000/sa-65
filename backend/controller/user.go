@@ -3,7 +3,6 @@ package controller
 import (
 	"net/http"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/joon0000/sa-65/entity"
 )
@@ -54,25 +53,29 @@ func CreateUser(c *gin.Context) {
 		Role:        role,
 	}
 
-	// ขั้นตอนการ validate ที่นำมาจาก unit test
-	if _, err := govalidator.ValidateStruct(us); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
 	// 13: บันทึก
 	if err := entity.DB().Create(&us).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": us})
+	c.JSON(http.StatusCreated, gin.H{"data": us})
 }
 
 // GET /user/:id
 func GetUser(c *gin.Context) {
 	var user entity.User
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM user WHERE id = ?", id).Scan(&user).Error; err != nil {
+	if tx := entity.DB().Where("id = ?", id).First(&user); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}
+
+// GET /users
+func ListUser(c *gin.Context) {
+	var user []entity.User
+	if err := entity.DB().Preload("Employee").Preload("MemberClass").Preload("Province").Preload("Role").Raw("SELECT * FROM users").Find(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -80,21 +83,10 @@ func GetUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-// GET /users
-func ListUser(c *gin.Context) {
-	var users []entity.User
-	if err := entity.DB().Raw("SELECT * FROM user").Scan(&users).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": users})
-}
-
 // DELETE /user/:id
 func DeleteUser(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM user WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM users WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
