@@ -9,7 +9,7 @@ type Employee struct {
 	gorm.Model
 	NAME     string
 	Email    string `gorm:"uniqueIndex"`
-	PASSWORD string
+	PASSWORD string `json:"-"`
 	USERS    []User `gorm:"foreignKey:EmployeeID"`
 }
 
@@ -43,7 +43,7 @@ type User struct {
 	CIV       string `gorm:"uniqueIndex"`
 	PHONE     string
 	EMAIL     string `gorm:"uniqueIndex"`
-	PASSWORD  string
+	PASSWORD  string `json:"-"`
 	ADDRESS   string
 	//FK
 	EmployeeID    *uint
