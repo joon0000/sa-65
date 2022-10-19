@@ -55,7 +55,7 @@ func SetupDatabase() {
 	})
 
 	var sirin Employee
-	db.Raw("SELECT * FROM employee WHERE email = ?", "sirinya@mail.com").Scan(&sirin)
+	db.Raw("SELECT * FROM employees WHERE email = ?", "sirinya@mail.com").Scan(&sirin)
 
 	//Role
 	student := Role{
