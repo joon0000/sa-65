@@ -13,7 +13,7 @@ func main() {
 	entity.SetupDatabase()
 
 	r := gin.Default()
-	//`r.Use(CORSMiddleware())
+	//r.Use(CORSMiddleware())
 
 	router := r.Group("/")
 	{
@@ -57,7 +57,7 @@ func main() {
 		}
 	}
 
-	// Signup User Route
+	//Signup User Route
 	//r.POST("/signup", controller.CreateEmployee)
 	// login User Route
 	//r.POST("/login", controller.Login)
