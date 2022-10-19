@@ -19,15 +19,15 @@ func CreateProvince(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": province})
+	c.JSON(http.StatusCreated, gin.H{"data": province})
 }
 
 // GET /province/:id
 func GetProvince(c *gin.Context) {
 	var province entity.Province
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM Province WHERE id = ?", id).Scan(&province).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if tx := entity.DB().Where("id = ?", id).First(&province); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "province not found"})
 		return
 	}
 
@@ -37,7 +37,7 @@ func GetProvince(c *gin.Context) {
 // GET /provinces
 func ListProvince(c *gin.Context) {
 	var province []entity.Province
-	if err := entity.DB().Raw("SELECT * FROM Province").Scan(&province).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM Provinces").Scan(&province).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -48,7 +48,7 @@ func ListProvince(c *gin.Context) {
 // DELETE /provinces/:id
 func DeleteProvince(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM Province WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM Provinces WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Province not found"})
 		return
 	}

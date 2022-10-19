@@ -19,15 +19,15 @@ func CreateMemberClass(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": memberclass})
+	c.JSON(http.StatusCreated, gin.H{"data": memberclass})
 }
 
 // GET /memberclass/:id
 func GetMemberClass(c *gin.Context) {
 	var memberclass entity.MemberClass
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM memberclass WHERE id = ?", id).Scan(&memberclass).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	if tx := entity.DB().Where("id = ?", id).First(&memberclass); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "MemberClass not found"})
 		return
 	}
 
@@ -37,7 +37,7 @@ func GetMemberClass(c *gin.Context) {
 // GET /memberclasses
 func ListMemberClass(c *gin.Context) {
 	var memberclass []entity.MemberClass
-	if err := entity.DB().Raw("SELECT * FROM memberclass").Scan(&memberclass).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM member_classes").Scan(&memberclass).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -48,8 +48,8 @@ func ListMemberClass(c *gin.Context) {
 // DELETE /memberclasses/:id
 func DeleteMemberClass(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM memberclass WHERE id = ?", id); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "memberclass not found"})
+	if tx := entity.DB().Exec("DELETE FROM member_classes WHERE id = ?", id); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "MemberClass not found"})
 		return
 	}
 
@@ -65,7 +65,7 @@ func UpdateMemberclass(c *gin.Context) {
 	}
 
 	if tx := entity.DB().Where("id = ?", memberclass.ID).First(&memberclass); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "memberclass not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "MemberClass not found"})
 		return
 	}
 

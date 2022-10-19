@@ -7,7 +7,7 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /user
+// POST /users
 func CreateUser(c *gin.Context) {
 	var user entity.User
 	var employee entity.Employee
@@ -83,7 +83,7 @@ func ListUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-// DELETE /user/:id
+// DELETE /users/:id
 func DeleteUser(c *gin.Context) {
 	id := c.Param("id")
 	if tx := entity.DB().Exec("DELETE FROM users WHERE id = ?", id); tx.RowsAffected == 0 {
