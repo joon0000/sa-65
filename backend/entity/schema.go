@@ -51,8 +51,8 @@ type User struct {
 	ProvinceID    *uint
 	MemberClassID *uint
 	//JOIN
-	Province    Province
-	Role        Role
-	MemberClass MemberClass
-	Employee    Employee
+	Province    Province    `gorm:"references:id"`
+	Role        Role        `gorm:"references:id"`
+	MemberClass MemberClass `gorm:"references:id"`
+	Employee    Employee    `gorm:"references:id"`
 }
