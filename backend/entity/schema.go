@@ -8,6 +8,7 @@ import (
 type Employee struct {
 	gorm.Model
 	NAME     string
+	Email    string `gorm:"uniqueIndex"`
 	PASSWORD string
 	USERS    []User `gorm:"foreignKey:EmployeeID"`
 }
