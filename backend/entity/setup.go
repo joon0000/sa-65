@@ -29,17 +29,33 @@ func SetupDatabase() {
 	db = database
 	//add example data
 	//emp
-	sirin := Employee{
-		NAME:     "Sirinya",
-		PASSWORD: "zaq1@wsX",
-	}
-	db.Model(&Employee{}).Create(&sirin)
+	/* 	sirin := Employee{
+	   		NAME:     "Sirinya",
+	   		PASSWORD: "zaq1@wsX",
 
-	atta := Employee{
+	   	}
+	   	db.Model(&Employee{}).Create(&sirin)
+
+	   	atta := Employee{
+	   		NAME:     "Attawit",
+	   		PASSWORD: "zxvseta",
+	   	}
+	   	db.Model(&Employee{}).Create(&atta) */
+
+	db.Model(&Employee{}).Create(&Employee{
+		NAME:     "Sirinya",
+		Email:    "sirinya@mail.com",
+		PASSWORD: "zaq1@wsX",
+	})
+
+	db.Model(&Employee{}).Create(&Employee{
 		NAME:     "Attawit",
+		Email:    "attawit@mail.com",
 		PASSWORD: "zxvseta",
-	}
-	db.Model(&Employee{}).Create(&atta)
+	})
+
+	var sirin Employee
+	db.Raw("SELECT * FROM employee WHERE email = ?", "sirinya@mail.com").Scan(&sirin)
 
 	//Role
 	student := Role{
