@@ -1,6 +1,10 @@
 package entity
 
 import (
+	//"fmt"
+	//"time"
+
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -27,31 +31,24 @@ func SetupDatabase() {
 	)
 
 	db = database
+
+	password1, err := bcrypt.GenerateFromPassword([]byte("zaq1@wsX"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("zxvseta"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("1111111111111"), 14)
+
 	//add example data
 	//emp
-	/* 	sirin := Employee{
-	   		NAME:     "Sirinya",
-	   		PASSWORD: "zaq1@wsX",
-
-	   	}
-	   	db.Model(&Employee{}).Create(&sirin)
-
-	   	atta := Employee{
-	   		NAME:     "Attawit",
-	   		PASSWORD: "zxvseta",
-	   	}
-	   	db.Model(&Employee{}).Create(&atta) */
 
 	db.Model(&Employee{}).Create(&Employee{
-		NAME:     "Sirinya",
+		Name:     "Sirinya",
 		Email:    "sirinya@mail.com",
-		PASSWORD: "zaq1@wsX",
+		Password: string(password1),
 	})
 
 	db.Model(&Employee{}).Create(&Employee{
-		NAME:     "Attawit",
+		Name:     "Attawit",
 		Email:    "attawit@mail.com",
-		PASSWORD: "zxvseta",
+		Password: string(password2),
 	})
 
 	var sirin Employee
@@ -122,8 +119,8 @@ func SetupDatabase() {
 		LastName:  "anpa",
 		CIV:       "1111111111111",
 		PHONE:     "0811111111",
-		EMAIL:     "preechapat@mail.com",
-		PASSWORD:  "1111111111111",
+		Email:     "preechapat@mail.com",
+		Password:  string(password3),
 		ADDRESS:   "ถนน a อำเภอ v",
 		//FK
 		Employee:    sirin,

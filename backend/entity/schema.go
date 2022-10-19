@@ -7,9 +7,9 @@ import (
 
 type Employee struct {
 	gorm.Model
-	NAME     string
+	Name     string
 	Email    string `gorm:"uniqueIndex"`
-	PASSWORD string `json:"-"`
+	Password string `json:"-"`
 	USERS    []User `gorm:"foreignKey:EmployeeID"`
 }
 
@@ -42,8 +42,8 @@ type User struct {
 	LastName  string
 	CIV       string `gorm:"uniqueIndex"`
 	PHONE     string
-	EMAIL     string `gorm:"uniqueIndex"`
-	PASSWORD  string `json:"-"`
+	Email     string `gorm:"uniqueIndex"`
+	Password  string `json:"-"`
 	ADDRESS   string
 	//FK
 	EmployeeID    *uint

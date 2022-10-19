@@ -7,21 +7,6 @@ import (
 	"github.com/joon0000/sa-65/entity"
 )
 
-// POST /Employees
-func CreateEmployee(c *gin.Context) {
-	var employee entity.Employee
-	if err := c.ShouldBindJSON(&employee); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	if err := entity.DB().Create(&employee).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	c.JSON(http.StatusCreated, gin.H{"data": employee})
-}
-
 // GET /Employee/:id
 func GetEmployee(c *gin.Context) {
 	var employee entity.Employee
