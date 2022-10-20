@@ -24,8 +24,8 @@ type Role struct {
 
 type Province struct {
 	gorm.Model
-	Name string
-	User []User `gorm:"foreignKey:ProvinceID"`
+	Name  string
+	Users []User `gorm:"foreignKey:ProvinceID"`
 }
 
 type MemberClass struct {
