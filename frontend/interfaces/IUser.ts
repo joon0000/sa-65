@@ -4,14 +4,14 @@ import { MemberClassesInterface } from "./IMemberClass";
 import { EmployeesInterface } from "./IEmployee";
 export interface UsersInterface {
     ID?:        number,
-    PIN:       string,
+    Pin:       string,
 	FirstName: string,
 	LastName:  string,
-	CIV:       string,
-	PHONE:     string,
+	Civ:       string,
+	Phone:     string,
 	Email:     string,
 	Password:  string, 
-	ADDRESS:   string,
+	Address:   string,
 	ProvinceID?:    number,
 	Province?:    ProvincesInterface,  
 	RoleID?:        number,    

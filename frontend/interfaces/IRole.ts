@@ -1,7 +1,7 @@
 export interface RolesInterface{
     ID:         number,
-	NAME:        string,
-	BORROW_DAY:  number,
-	BOOKROOM_HR: number,
-	BOOKCOM_HR:  number,
+	Name:        string,
+	BorrowDay:  number,
+	BookRoomHR: number,
+	BookComHR:  number,
 }

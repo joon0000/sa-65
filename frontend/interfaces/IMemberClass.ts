@@ -1,5 +1,5 @@
 export interface MemberClassesInterface{
     ID:      number,
-	NAME:     string,
-	DISCOUNT: number,
+	Name:     string,
+	Discount: number,
 }
