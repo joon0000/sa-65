@@ -9,42 +9,42 @@ type Employee struct {
 	gorm.Model
 	Name     string
 	Email    string `gorm:"uniqueIndex"`
-	Password string `json:"-"`
-	USERS    []User `gorm:"foreignKey:EmployeeID"`
+	Password string
+	Users    []User `gorm:"foreignKey:EmployeeID"`
 }
 
 type Role struct {
 	gorm.Model
-	NAME        string
-	BORROW_DAY  int
-	BOOKROOM_HR int
-	BOOKCOM_HR  int
-	USERS       []User `gorm:"foreignKey:RoleID"`
+	Name       string
+	BorrowDay  int
+	BookRoomHR int
+	BookComHR  int
+	Users      []User `gorm:"foreignKey:RoleID"`
 }
 
 type Province struct {
 	gorm.Model
-	NAME  string
-	USERS []User `gorm:"foreignKey:ProvinceID"`
+	Name string
+	User []User `gorm:"foreignKey:ProvinceID"`
 }
 
 type MemberClass struct {
 	gorm.Model
-	NAME     string
-	DISCOUNT int
-	USERS    []User `gorm:"foreignKey:MemberClassID"`
+	Name     string
+	Discount int
+	Users    []User `gorm:"foreignKey:MemberClassID"`
 }
 
 type User struct {
 	gorm.Model
-	PIN       string `gorm:"uniqueIndex"`
+	Pin       string `gorm:"uniqueIndex"`
 	FirstName string
 	LastName  string
-	CIV       string `gorm:"uniqueIndex"`
-	PHONE     string
+	Civ       string `gorm:"uniqueIndex"`
+	Phone     string
 	Email     string `gorm:"uniqueIndex"`
-	Password  string `json:"-"`
-	ADDRESS   string
+	Password  string
+	Address   string
 	//FK
 	EmployeeID    *uint
 	RoleID        *uint

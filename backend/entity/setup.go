@@ -56,72 +56,73 @@ func SetupDatabase() {
 
 	//Role
 	student := Role{
-		NAME:        "Student",
-		BORROW_DAY:  3,
-		BOOKROOM_HR: 3,
-		BOOKCOM_HR:  4,
+		Name:       "Student",
+		BorrowDay:  3,
+		BookRoomHR: 3,
+		BookComHR:  4,
 	}
+
 	db.Model(&Role{}).Create(&student)
 
 	teacher := Role{
-		NAME:        "Teacher",
-		BORROW_DAY:  7,
-		BOOKROOM_HR: 12,
-		BOOKCOM_HR:  12,
+		Name:       "Teacher",
+		BorrowDay:  7,
+		BookRoomHR: 12,
+		BookComHR:  12,
 	}
 	db.Model(&Role{}).Create(&teacher)
 
 	//province
 	korat := Province{
-		NAME: "Nakhon Ratchasima",
+		Name: "Nakhon Ratchasima",
 	}
 	db.Model(&Province{}).Create(&korat)
 
 	chon := Province{
-		NAME: "Chonburi",
+		Name: "Chonburi",
 	}
 	db.Model(&Province{}).Create(&chon)
 
 	bangkok := Province{
-		NAME: "Bangkok",
+		Name: "Bangkok",
 	}
 	db.Model(&Province{}).Create(&bangkok)
 
 	//member
 	classic := MemberClass{
-		NAME:     "classic",
-		DISCOUNT: 0,
+		Name:     "classic",
+		Discount: 0,
 	}
 	db.Model(&MemberClass{}).Create(&classic)
 
 	silver := MemberClass{
-		NAME:     "silver",
-		DISCOUNT: 5,
+		Name:     "silver",
+		Discount: 5,
 	}
 	db.Model(&MemberClass{}).Create(&silver)
 
 	gold := MemberClass{
-		NAME:     "gold",
-		DISCOUNT: 10,
+		Name:     "gold",
+		Discount: 10,
 	}
 	db.Model(&MemberClass{}).Create(&gold)
 
 	plat := MemberClass{
-		NAME:     "platinum",
-		DISCOUNT: 20,
+		Name:     "platinum",
+		Discount: 20,
 	}
 	db.Model(&MemberClass{}).Create(&plat)
 
 	//user
 	db.Model(&User{}).Create(&User{
-		PIN:       "B6111111",
+		Pin:       "B6111111",
 		FirstName: "preecha",
 		LastName:  "anpa",
-		CIV:       "1111111111111",
-		PHONE:     "0811111111",
+		Civ:       "1111111111111",
+		Phone:     "0811111111",
 		Email:     "preechapat@mail.com",
 		Password:  string(password3),
-		ADDRESS:   "ถนน a อำเภอ v",
+		Address:   "ถนน a อำเภอ v",
 		//FK
 		Employee:    sirin,
 		Role:        student,
