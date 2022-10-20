@@ -23,7 +23,7 @@ import PeopleIcon from "@mui/icons-material/People";
 //import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import Home from "./components/Home";
-import Users from "./components/Users";
+//import Users from "./components/Users";
 import SignIn from "./components/SignIn";
 
 const drawerWidth = 240;
@@ -189,7 +189,6 @@ function App() {
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/users" element={<Users />} />
               </Routes>
             </Container>
           </Box>
