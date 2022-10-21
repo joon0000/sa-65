@@ -21,15 +21,17 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 import Home from "./components/Home";
 import Users from "./components/Users";
-//import UserCreate from "./components/UserCreate";
+import UserCreate from "./components/UserCreate";
 //import WatchVideos from "./components/WatchVideos";
 //import WatchVideoCreate from "./components/WatchVideoCreate";
 import SignIn from "./components/SignIn";
 
 const drawerWidth = 240;
+
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -84,7 +86,7 @@ const mdTheme = createTheme();
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
   { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" },
-  //{ name: "การเข้าชมวีดีโอ", icon: <YouTubeIcon />, path: "/watch_videos" },
+  { name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" },
 ];
 
 function App() {
@@ -193,6 +195,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/users" element={<Users />} />
+                <Route path="/user/create" element={<UserCreate />} />
               </Routes>
             </Container>
           </Box>
@@ -200,6 +203,31 @@ function App() {
       </ThemeProvider>
     </Router>
   );
-}
 
+
+
+}
 export default App;
+// export default function App(): JSX.Element {
+
+// return (
+
+//   <Router>
+
+//    <div>
+
+//    <Navbar />
+
+//    <Routes>
+//         <Route path="/" element={<RecordCreate />} />
+//         <Route path="/test" element={<ResearchroomCreate />}/>
+//         <Route path="/create" element={<Records />} />
+//    </Routes>
+
+//    </div>
+
+//   </Router>
+
+// );
+
+// }

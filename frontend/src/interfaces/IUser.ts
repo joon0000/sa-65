@@ -2,16 +2,16 @@ import { ProvincesInterface } from "./IProvince";
 import { RolesInterface } from "./IRole";
 import { MemberClassesInterface } from "./IMemberClass";
 import { EmployeesInterface } from "./IEmployee";
-export interface UsersInterface {
+export interface UserInterface {
     ID?:        number,
-    Pin:       string,
-	FirstName: string,
-	LastName:  string,
-	Civ:       string,
-	Phone:     string,
-	Email:     string,
-	Password:  string, 
-	Address:   string,
+    Pin?:       string,
+	FirstName?: string,
+	LastName?:  string,
+	Civ?:       string,
+	Phone?:     string,
+	Email?:     string,
+	Password?:  string, 
+	Address?:   string,
 	ProvinceID?:    number,
 	Province?:    ProvincesInterface,  
 	RoleID?:        number,    

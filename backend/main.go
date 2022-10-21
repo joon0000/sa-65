@@ -7,7 +7,7 @@ import (
 	"github.com/joon0000/sa-65/middlewares"
 )
 
-const PORT = "8080"
+//const PORT = "8080"
 
 func main() {
 	entity.SetupDatabase()
@@ -63,7 +63,7 @@ func main() {
 	r.POST("/login", controller.Login)
 
 	// Run the server go run main.go
-	r.Run("localhost: " + PORT)
+	r.Run("0.0.0.0:8080")
 }
 
 func CORSMiddleware() gin.HandlerFunc {

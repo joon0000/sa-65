@@ -4,11 +4,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { UsersInterface } from "../interfaces/IUser";
+import { UserInterface } from "../interfaces/IUser";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { GetUsers } from "../services/HttpClientService";
 function Users() {
-  const [users, setUsers] = useState<UsersInterface[]>([]);
+  const [users, setUsers] = useState<UserInterface[]>([]);
 
   const getUsers = async () => {
     let res = await GetUsers();
@@ -19,18 +19,18 @@ function Users() {
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ลำดับ", width: 100 },
-    { field: "Pin", headerName: "รหัสนักศึกษา", width: 100 },
-    { field: "FirstName", headerName: "ชื่อ", width: 150 },
-    { field: "LastName", headerName: "สกุล", width: 150 },
-    { field: "Civ", headerName: "รหัสบัตรประชาชน", width: 150 },
-    { field: "Phone", headerName: "เบอร์โทร", width: 100 },
-    { field: "Email", headerName: "อีเมล", width: 400 },
-    { field: "Password", headerName: "รหัส", width: 300 },    
-    { field: "Address", headerName: "ที่อยู่", width: 400 },    
-    { field: "Province", headerName: "จังหวัด", width: 200 },    
-    { field: "Role", headerName: "บทบาท", width: 100 },    
-    { field: "MemberClass", headerName: "คลาส", width: 400 },    
-    { field: "Employee", headerName: "พนักงานที่ลงทะเบียน", width: 400 },    
+    { field: "Pin", headerName: "รหัสนักศึกษา", width: 100, valueFormatter: (params) => params.value.Pin,},
+    { field: "FirstName", headerName: "ชื่อ", width: 150, valueFormatter: (params) => params.value.FirstName,},
+    { field: "LastName", headerName: "สกุล", width: 150,  valueFormatter: (params) => params.value.LastName,},
+    { field: "Civ", headerName: "รหัสบัตรประชาชน", width: 150 , valueFormatter: (params) => params.value.Civ,},
+    { field: "Phone", headerName: "เบอร์โทร", width: 100 , valueFormatter: (params) => params.value.Phone,},
+    { field: "Email", headerName: "อีเมล", width: 400 , valueFormatter: (params) => params.value.Email,},
+    { field: "Password", headerName: "รหัส", width: 300 , valueFormatter: (params) => params.value.Password,},    
+    { field: "Address", headerName: "ที่อยู่", width: 400 , valueFormatter: (params) => params.value.Address,},    
+    { field: "Province", headerName: "จังหวัด", width: 200  ,valueFormatter: (params) => params.value.Province,},    
+    { field: "Role", headerName: "บทบาท", width: 100 , valueFormatter: (params) => params.value.Role,},    
+    { field: "MemberClass", headerName: "คลาส", width: 400 , valueFormatter: (params) => params.value.MemberClass,},    
+    { field: "Employee", headerName: "พนักงานที่ลงทะเบียน", width: 400 , valueFormatter: (params) => params.value.Employee,},    
   ];
 
   useEffect(() => {

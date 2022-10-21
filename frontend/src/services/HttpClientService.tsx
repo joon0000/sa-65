@@ -1,6 +1,6 @@
 import React from "react";
 import { SigninInterface } from "../interfaces/ISignin";
-import { UsersInterface } from "../interfaces/IUser";
+import { UserInterface } from "../interfaces/IUser";
 import { EmployeesInterface } from "../interfaces/IEmployee";
 
 const apiUrl = "http://localhost:8080";
@@ -137,7 +137,7 @@ async function GetEmployees() {
   return res;
 }
 
-async function CreateEmployees(data: UsersInterface) {
+async function CreateEmployees(data: UserInterface) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -157,7 +157,7 @@ async function CreateEmployees(data: UsersInterface) {
   return res;
 }
 
-async function CreateUsers(data: EmployeesInterface) {
+async function Users(data: EmployeesInterface) {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -188,5 +188,5 @@ export {
   GetUsers,
   GetEmployees,
   CreateEmployees,
-  CreateUsers,
+  Users,
 };
