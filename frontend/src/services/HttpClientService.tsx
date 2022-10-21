@@ -137,7 +137,7 @@ async function GetEmployees() {
   return res;
 }
 
-async function CreateUsers(data: UsersInterface) {
+async function CreateEmployees(data: UsersInterface) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -157,7 +157,7 @@ async function CreateUsers(data: UsersInterface) {
   return res;
 }
 
-async function CreateEmployees(data: EmployeesInterface) {
+async function CreateUsers(data: EmployeesInterface) {
   const requestOptions = {
     method: "POST",
     headers: {

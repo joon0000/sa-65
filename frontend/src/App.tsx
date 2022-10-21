@@ -19,11 +19,14 @@ import Button from "@mui/material/Button";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
-import PeopleIcon from "@mui/icons-material/People";
+//import PeopleIcon from "@mui/icons-material/People";
 //import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import Home from "./components/Home";
 //import Users from "./components/Users";
+//import UserCreate from "./components/UserCreate";
+//import WatchVideos from "./components/WatchVideos";
+//import WatchVideoCreate from "./components/WatchVideoCreate";
 import SignIn from "./components/SignIn";
 
 const drawerWidth = 240;
@@ -80,7 +83,7 @@ const mdTheme = createTheme();
 
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-  { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" },
+  //{ name: "สมาชิก", icon: <PeopleIcon />, path: "/users" },
   //{ name: "การเข้าชมวีดีโอ", icon: <YouTubeIcon />, path: "/watch_videos" },
 ];
 

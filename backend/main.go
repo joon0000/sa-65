@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joon0000/sa-65/controller"
 	"github.com/joon0000/sa-65/entity"
-	//"github.com/joon0000/sa-65/middlewares"
+	"github.com/joon0000/sa-65/middlewares"
 )
 
 const PORT = "8080"
@@ -13,11 +13,11 @@ func main() {
 	entity.SetupDatabase()
 
 	r := gin.Default()
-	//r.Use(CORSMiddleware())
+	r.Use(CORSMiddleware())
 
 	router := r.Group("/")
 	{
-		//router.Use(middlewares.Authorizes())
+		router.Use(middlewares.Authorizes())
 		{
 			//user routes
 			router.GET("/users", controller.ListUser)
@@ -58,9 +58,9 @@ func main() {
 	}
 
 	//Signup User Route
-	//r.POST("/signup", controller.CreateEmployee)
+	r.POST("/signup", controller.CreateEmployee)
 	// login User Route
-	//r.POST("/login", controller.Login)
+	r.POST("/login", controller.Login)
 
 	// Run the server go run main.go
 	r.Run("localhost: " + PORT)
