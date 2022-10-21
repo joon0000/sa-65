@@ -22,15 +22,15 @@ function Users() {
     { field: "Pin", headerName: "รหัสนักศึกษา", width: 100, valueFormatter: (params) => params.value.Pin,},
     { field: "FirstName", headerName: "ชื่อ", width: 150, valueFormatter: (params) => params.value.FirstName,},
     { field: "LastName", headerName: "สกุล", width: 150,  valueFormatter: (params) => params.value.LastName,},
-    { field: "Civ", headerName: "รหัสบัตรประชาชน", width: 150 , valueFormatter: (params) => params.value.Civ,},
+    { field: "Civ", headerName: "รหัสบัตรประชาชน", width: 100 , valueFormatter: (params) => params.value.Civ,},
     { field: "Phone", headerName: "เบอร์โทร", width: 100 , valueFormatter: (params) => params.value.Phone,},
-    { field: "Email", headerName: "อีเมล", width: 400 , valueFormatter: (params) => params.value.Email,},
-    { field: "Password", headerName: "รหัส", width: 300 , valueFormatter: (params) => params.value.Password,},    
-    { field: "Address", headerName: "ที่อยู่", width: 400 , valueFormatter: (params) => params.value.Address,},    
-    { field: "Province", headerName: "จังหวัด", width: 200  ,valueFormatter: (params) => params.value.Province,},    
-    { field: "Role", headerName: "บทบาท", width: 100 , valueFormatter: (params) => params.value.Role,},    
-    { field: "MemberClass", headerName: "คลาส", width: 400 , valueFormatter: (params) => params.value.MemberClass,},    
-    { field: "Employee", headerName: "พนักงานที่ลงทะเบียน", width: 400 , valueFormatter: (params) => params.value.Employee,},    
+    { field: "Email", headerName: "อีเมล", width: 100 , valueFormatter: (params) => params.value.Email,},
+    { field: "Password", headerName: "รหัส", width: 100 , valueFormatter: (params) => params.value.Password,},    
+    { field: "Address", headerName: "ที่อยู่", width: 100 , valueFormatter: (params) => params.value.Address,},    
+    { field: "Province", headerName: "จังหวัด", width: 100  ,valueFormatter: (params) => params.value.Name,},    
+    { field: "Role", headerName: "บทบาท", width: 100 , valueFormatter: (params) => params.value.Name,},    
+    { field: "MemberClass", headerName: "คลาส", width: 100 , valueFormatter: (params) => params.value.Name,},    
+    { field: "Employee", headerName: "พนักงานที่ลงทะเบียน", width: 100 , valueFormatter: (params) => params.value.Name,},    
   ];
 
   useEffect(() => {

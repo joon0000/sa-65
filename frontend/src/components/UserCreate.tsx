@@ -28,6 +28,7 @@ import {
   GetEmployees,
   GetMemberClasses,
   Users,
+  //GetEmployeeByEmpID,
 } from "../services/HttpClientService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -186,6 +187,113 @@ function UserCreate() {
         </Box>
         <Divider />
         <Grid container spacing={3} sx={{ padding: 2 }}>
+
+        <Grid item xs={6}>
+            <p>ชื่อ</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="FirstName"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกชื่อ"
+                value={user?.FirstName || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>นามสกุล</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="LastName"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกนามสกุล"
+                value={user?.LastName || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>รหัสนักศึกษา/อาจารย์</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Pin"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกชื่อรหัสนักศึกษา/อาจารย์"
+                value={user?.Pin || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>เลขบัตรประชาชน</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Civ"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกเลขบัตรประชาชน"
+                value={user?.Civ || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>เบอร์โทรศัพท์</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Phone"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                value={user?.Phone || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>อีเมลล์</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Email"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกอีเมลล์"
+                value={user?.Email || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <p>รหัสผ่าน</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Password"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกรหัสผ่าน"
+                value={user?.Password || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
+
+          
           
           {/*Video combobox*/}
           <Grid item xs={6}>
@@ -210,6 +318,30 @@ function UserCreate() {
               </Select>
             </FormControl>
           </Grid>
+
+
+
+          {/*<Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+            <p>พนักงานที่ลงทะเบียน</p>
+              <Select
+                native
+                value={user?.EmployeeID + ""}
+                onChange={handleChange}
+                disabled
+                inputProps={{
+                  name: "EmployeeID",
+                }}
+              >
+                <option aria-label="None" value="">
+                  กรุณาเลือกชื่อ
+                </option>
+                <option value={employees.ID} key={employees.ID}>
+                  {employees?.Name}
+                </option>
+              </Select>
+            </FormControl>
+            </Grid>*/}
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
@@ -239,7 +371,7 @@ function UserCreate() {
               <p>คลาส</p>
               <Select
                 native
-                value={user?.MemberClass + ""}
+                value={user?.MemberClassID + ""}
                 onChange={handleChange}
                 inputProps={{
                   name: "MemberClassID",
@@ -251,12 +383,26 @@ function UserCreate() {
                 {memberclasses.map((item: MemberClassesInterface) => (
                   <option value={item.ID} key={item.ID}>
                     {item.Name}
-                </option>
+                  </option>
                 ))}
               </Select>
             </FormControl>
           </Grid>
 
+          <Grid item xs={6}>
+            <p>ที่อยู่</p>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                id="Address"
+                variant="outlined"
+                type="string"
+                size="medium"
+                placeholder="กรุณากรอกที่อยู่"
+                value={user?.Address || ""}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+          </Grid>
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">

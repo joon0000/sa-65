@@ -137,7 +137,33 @@ async function GetEmployees() {
   return res;
 }
 
-async function CreateEmployees(data: UserInterface) {
+async function GetEmployeeByEmpID() {
+  let uid = localStorage.getItem("uid");
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(
+    `${apiUrl}/employee/${uid}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+
+async function CreateEmployees(data: EmployeesInterface) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -157,7 +183,7 @@ async function CreateEmployees(data: UserInterface) {
   return res;
 }
 
-async function Users(data: EmployeesInterface) {
+async function Users(data: UserInterface) {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -167,7 +193,7 @@ async function Users(data: EmployeesInterface) {
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/employees`, requestOptions)
+  let res = await fetch(`${apiUrl}/users`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -187,6 +213,7 @@ export {
   GetRoles,
   GetUsers,
   GetEmployees,
+  GetEmployeeByEmpID,
   CreateEmployees,
   Users,
 };
