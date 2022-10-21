@@ -86,7 +86,7 @@ const mdTheme = createTheme();
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
   { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" },
-  { name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" },
+ // { name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" },
 ];
 
 function App() {
@@ -208,26 +208,3 @@ function App() {
 
 }
 export default App;
-// export default function App(): JSX.Element {
-
-// return (
-
-//   <Router>
-
-//    <div>
-
-//    <Navbar />
-
-//    <Routes>
-//         <Route path="/" element={<RecordCreate />} />
-//         <Route path="/test" element={<ResearchroomCreate />}/>
-//         <Route path="/create" element={<Records />} />
-//    </Routes>
-
-//    </div>
-
-//   </Router>
-
-// );
-
-// }
