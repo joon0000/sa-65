@@ -23,7 +23,6 @@ func SetupDatabase() {
 
 	// Migrate the schema
 	database.AutoMigrate(
-		&Employee{},
 		&Role{},
 		&Province{},
 		&MemberClass{},
@@ -33,26 +32,9 @@ func SetupDatabase() {
 	db = database
 
 	password1, err := bcrypt.GenerateFromPassword([]byte("zaq1@wsX"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("zxvseta"), 14)
 	password3, err := bcrypt.GenerateFromPassword([]byte("1111111111111"), 14)
 
 	//add example data
-	//emp
-
-	db.Model(&Employee{}).Create(&Employee{
-		Name:     "Sirinya",
-		Email:    "sirinya@mail.com",
-		Password: string(password1),
-	})
-
-	db.Model(&Employee{}).Create(&Employee{
-		Name:     "Attawit",
-		Email:    "attawit@mail.com",
-		Password: string(password2),
-	})
-
-	var sirin Employee
-	db.Raw("SELECT * FROM employees WHERE email = ?", "sirinya@mail.com").Scan(&sirin)
 
 	//Role
 	student := Role{
@@ -71,6 +53,14 @@ func SetupDatabase() {
 		BookComHR:  12,
 	}
 	db.Model(&Role{}).Create(&teacher)
+
+	employee := Role{
+		Name:       "Employee",
+		BorrowDay:  5,
+		BookRoomHR: 6,
+		BookComHR:  6,
+	}
+	db.Model(&Role{}).Create(&employee)
 
 	//province
 	korat := Province{
@@ -124,9 +114,23 @@ func SetupDatabase() {
 		Password:  string(password3),
 		Address:   "ถนน a อำเภอ v",
 		//FK
-		Employee:    sirin,
 		Role:        student,
 		Province:    korat,
 		MemberClass: classic,
+	})
+
+	db.Model(&User{}).Create(&User{
+		Pin:       "E123456",
+		FirstName: "Sirinya",
+		LastName:  "kot",
+		Civ:       "1234567890123",
+		Phone:     "0899999999",
+		Email:     "sirinya@mail.com",
+		Password:  string(password1),
+		Address:   "ถนน c อำเภอ z",
+		//FK
+		Role:        employee,
+		Province:    bangkok,
+		MemberClass: plat,
 	})
 }

@@ -5,14 +5,6 @@ import (
 	//"time"
 )
 
-type Employee struct {
-	gorm.Model
-	Name     string
-	Email    string `gorm:"uniqueIndex"`
-	Password string
-	Users    []User `gorm:"foreignKey:EmployeeID"`
-}
-
 type Role struct {
 	gorm.Model
 	Name       string
@@ -46,7 +38,6 @@ type User struct {
 	Password  string
 	Address   string
 	//FK
-	EmployeeID    *uint
 	RoleID        *uint
 	ProvinceID    *uint
 	MemberClassID *uint
@@ -54,5 +45,4 @@ type User struct {
 	Province    Province    `gorm:"references:id"`
 	Role        Role        `gorm:"references:id"`
 	MemberClass MemberClass `gorm:"references:id"`
-	Employee    Employee    `gorm:"references:id"`
 }
