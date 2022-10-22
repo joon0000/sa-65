@@ -51,6 +51,14 @@ func CreateUser(c *gin.Context) {
 		MemberClass: memberclass,
 		Province:    province,
 		Role:        role,
+		Pin:         user.Pin,
+		FirstName:   user.FirstName,
+		LastName:    user.LastName,
+		Civ:         user.Civ,
+		Phone:       user.Phone,
+		Email:       user.Email,
+		Password:    user.Password,
+		Address:     user.Address,
 	}
 
 	// 13: บันทึก

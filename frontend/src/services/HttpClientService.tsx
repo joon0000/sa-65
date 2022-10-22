@@ -137,8 +137,8 @@ async function GetEmployees() {
   return res;
 }
 
-async function GetEmployeeByEmpID() {
-  let uid = localStorage.getItem("uid");
+async function GetEmployeesID() {
+  let EmpID = localStorage.getItem("EmpID")
   const requestOptions = {
     method: "GET",
     headers: {
@@ -147,10 +147,7 @@ async function GetEmployeeByEmpID() {
     },
   };
 
-  let res = await fetch(
-    `${apiUrl}/employee/${uid}`,
-    requestOptions
-  )
+  let res = await fetch(`${apiUrl}/employeeGetID/${EmpID}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -183,7 +180,7 @@ async function CreateEmployees(data: EmployeesInterface) {
   return res;
 }
 
-async function Users(data: UserInterface) {
+async function CreateUsers(data: UserInterface) {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -213,7 +210,7 @@ export {
   GetRoles,
   GetUsers,
   GetEmployees,
-  GetEmployeeByEmpID,
+  GetEmployeesID,
   CreateEmployees,
-  Users,
+  CreateUsers,
 };

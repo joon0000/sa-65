@@ -12,9 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+//import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+//import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+//import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { ProvincesInterface } from "../interfaces/IProvince"; //Playlist --> Province
 import { RolesInterface } from "../interfaces/IRole"; //Reso --> Role
@@ -25,9 +25,9 @@ import { UserInterface } from "../interfaces/IUser";
 import {
   GetProvinces,
   GetRoles,
-  GetEmployees,
+  GetEmployeesID,
   GetMemberClasses,
-  Users,
+  CreateUsers,
   //GetEmployeeByEmpID,
 } from "../services/HttpClientService";
 
@@ -61,16 +61,18 @@ function UserCreate() {
   };
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
-
-    
-    const name = event.target.name as keyof typeof user;
+    //console.log(event.target.name);
+    //console.log(event.target.value);
+    const name = event.target.name as keyof typeof UserCreate;
     setUser({
       ...user,
       [name]: event.target.value,
     });
   };
+
+  const Check = (
+
+    )=> {console.log(user)}
 
   //text field
   const handleInputChange = (
@@ -80,7 +82,7 @@ function UserCreate() {
     const { value } = event.target;
     setUser({ ...user, [id]: value });
   };
-
+  
   const getProvinces = async () => {
     let res = await GetProvinces();
     if (res) {
@@ -103,7 +105,7 @@ function UserCreate() {
   };
   
   const getEmployees = async () => {
-    let res = await GetEmployees();
+    let res = await GetEmployeesID();
     if (res) {
       setEmployees(res);
     }
@@ -120,11 +122,10 @@ function UserCreate() {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;
   };
-
   async function submit() {
     let data = {
-      EmployeeID: convertType(user?.EmployeeID),
-      MemberClassID: convertType(user?.MemberClassID),
+      EmployeeID: convertType(localStorage.getItem("uid") as string),
+      MemberClassID: 1,
       ProvinceID: convertType(user?.ProvinceID),
       RoleID: convertType(user?.RoleID),
       Pin: user?.Pin,
@@ -133,11 +134,12 @@ function UserCreate() {
       Civ: user?.Civ,
       Phone: user?.Phone,
       Email: user?.Email,
-      Password: user?.Password,
+      Password: user?.Civ,
       Address: user?.Address,
     };
+    console.log(data);
 
-    let res = await Users(data);
+    let res = await CreateUsers(data);
     if (res) {
       setSuccess(true);
     } else {
@@ -278,7 +280,7 @@ function UserCreate() {
             </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          {/*<Grid item xs={6}>
             <p>รหัสผ่าน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
@@ -291,12 +293,12 @@ function UserCreate() {
                 onChange={handleInputChange}
               />
             </FormControl>
-          </Grid>
+        </Grid>*/}
 
           
           
           {/*Video combobox*/}
-          <Grid item xs={6}>
+          {/*<Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>พนักงานที่ลงทะเบียน</p>
               <Select
@@ -317,7 +319,7 @@ function UserCreate() {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+                </Grid>*/}
 
 
 
@@ -366,7 +368,7 @@ function UserCreate() {
             </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          {/*<Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>คลาส</p>
               <Select
@@ -387,7 +389,7 @@ function UserCreate() {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+                </Grid>*/}
 
           <Grid item xs={6}>
             <p>ที่อยู่</p>
