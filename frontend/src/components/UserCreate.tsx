@@ -18,17 +18,12 @@ import TextField from "@mui/material/TextField";
 
 import { ProvincesInterface } from "../interfaces/IProvince"; //Playlist --> Province
 import { RolesInterface } from "../interfaces/IRole"; //Reso --> Role
-import { EmployeesInterface } from "../interfaces/IEmployee"; //Video --> Employee
-import { MemberClassesInterface } from "../interfaces/IMemberClass"; //Watch --> MemberClass
 import { UserInterface } from "../interfaces/IUser";
 
 import {
   GetProvinces,
   GetRoles,
-  GetEmployeesID,
-  GetMemberClasses,
   CreateUsers,
-  //GetEmployeeByEmpID,
 } from "../services/HttpClientService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -41,8 +36,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 function UserCreate() {
   const [provinces, setProvinces] = React.useState<ProvincesInterface[]>([]);
   const [roles, setRoles] = useState<RolesInterface[]>([]);
-  const [memberclasses, setMemberClasses] = useState<MemberClassesInterface[]>([]);
-  const [employees, setEmployees] = React.useState<EmployeesInterface[]>([]);
   const [user, setUser] = useState<Partial<UserInterface>>();
 
   const [success, setSuccess] = useState(false);
@@ -61,18 +54,12 @@ function UserCreate() {
   };
     //combobox
     const handleChange = (event: SelectChangeEvent) => {
-    //console.log(event.target.name);
-    //console.log(event.target.value);
     const name = event.target.name as keyof typeof UserCreate;
     setUser({
       ...user,
       [name]: event.target.value,
     });
   };
-
-  const Check = (
-
-    )=> {console.log(user)}
 
   //text field
   const handleInputChange = (
@@ -97,23 +84,8 @@ function UserCreate() {
     }
   };
 
-  const getMemberClasses = async () => {
-    let res = await GetMemberClasses();
-    if (res) {
-      setMemberClasses(res);
-    }
-  };
-  
-  const getEmployees = async () => {
-    let res = await GetEmployeesID();
-    if (res) {
-      setEmployees(res);
-    }
-  };
 
   useEffect(() => {
-    getEmployees();
-    getMemberClasses();
     getProvinces();
     getRoles();
   }, []);
@@ -127,7 +99,6 @@ function UserCreate() {
   
   async function submit() {
     let data = {
-      EmployeeID: convertType(localStorage.getItem("uid") as string),
       MemberClassID: 1,
       ProvinceID: convertType(user?.ProvinceID),
       RoleID: convertType(user?.RoleID),
@@ -283,117 +254,6 @@ function UserCreate() {
             </FormControl>
           </Grid>
 
-          {/*<Grid item xs={6}>
-            <p>รหัสผ่าน</p>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="Password"
-                variant="outlined"
-                type="string"
-                size="medium"
-                placeholder="กรุณากรอกรหัสผ่าน"
-                value={user?.Password || ""}
-                onChange={handleInputChange}
-              />
-            </FormControl>
-        </Grid>*/}
-
-          
-          
-          {/*Video combobox*/}
-          {/*<Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>พนักงานที่ลงทะเบียน</p>
-              <Select
-                native
-                value={user?.EmployeeID + ""}
-                onChange={handleChange}
-                inputProps={{
-                  name: "EmployeeID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกชื่อ
-                </option>
-                {employees.map((item: EmployeesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-                </Grid>*/}
-
-
-
-          {/*<Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-            <p>พนักงานที่ลงทะเบียน</p>
-              <Select
-                native
-                value={user?.EmployeeID + ""}
-                onChange={handleChange}
-                disabled
-                inputProps={{
-                  name: "EmployeeID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกชื่อ
-                </option>
-                <option value={employees.ID} key={employees.ID}>
-                  {employees?.Name}
-                </option>
-              </Select>
-            </FormControl>
-            </Grid>*/}
-
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>บทบาท</p>
-              <Select
-                native
-                value={user?.RoleID + ""}
-                onChange={handleChange}
-                inputProps={{
-                  name: "RoleID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกบทบาท
-                </option>
-                {roles.map((item: RolesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          {/*<Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>คลาส</p>
-              <Select
-                native
-                value={user?.MemberClassID + ""}
-                onChange={handleChange}
-                inputProps={{
-                  name: "MemberClassID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกคลาส
-                </option>
-                {memberclasses.map((item: MemberClassesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-                </Grid>*/}
-
           <Grid item xs={6}>
             <p>ที่อยู่</p>
             <FormControl fullWidth variant="outlined">
@@ -434,19 +294,19 @@ function UserCreate() {
 
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>จังหวัด</p>
+              <p>บทบาท</p>
               <Select
                 native
-                value={user?.ProvinceID + ""}
+                value={user?.RoleID + ""}
                 onChange={handleChange}
                 inputProps={{
-                  name: "ProvinceID",
+                  name: "RoleID",
                 }}
               >
                 <option aria-label="None" value="">
-                  กรุณาเลือกจังหวัด
+                  กรุณาเลือกบทบาท
                 </option>
-                {provinces.map((item: ProvincesInterface) => (
+                {roles.map((item: RolesInterface) => (
                   <option value={item.ID} key={item.ID}>
                     {item.Name}
                   </option>

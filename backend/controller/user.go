@@ -85,7 +85,7 @@ func GetUser(c *gin.Context) {
 // GET /users
 func ListUser(c *gin.Context) {
 	var user []entity.User
-	if err := entity.DB().Preload("Employee").Preload("MemberClass").Preload("Province").Preload("Role").Raw("SELECT * FROM users").Find(&user).Error; err != nil {
+	if err := entity.DB().Preload("MemberClass").Preload("Province").Preload("Role").Raw("SELECT * FROM users").Find(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

@@ -30,7 +30,6 @@ function Users() {
     { field: "Province", headerName: "จังหวัด", width: 100  ,valueFormatter: (params) => params.value.Name,},    
     { field: "Role", headerName: "บทบาท", width: 100 , valueFormatter: (params) => params.value.Name,},    
     { field: "MemberClass", headerName: "คลาส", width: 100 , valueFormatter: (params) => params.value.Name,},    
-    { field: "Employee", headerName: "พนักงานที่ลงทะเบียน", width: 100 , valueFormatter: (params) => params.value.Name,},    
   ];
 
   useEffect(() => {
