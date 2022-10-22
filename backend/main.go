@@ -26,13 +26,6 @@ func main() {
 			router.PATCH("/users", controller.UpdateUser)
 			router.DELETE("/users/:id", controller.DeleteUser)
 
-			//employee routes
-			router.GET("/employees", controller.ListEmployee)
-			router.GET("/employee/:id", controller.GetEmployee)
-			//r.POST("/employees", controller.CreateEmployee)
-			router.PATCH("/employees", controller.UpdateEmployee)
-			router.DELETE("/employees/:id", controller.DeleteEmployee)
-
 			//memberClass routes
 			router.GET("/memberclasses", controller.ListMemberClass)
 			router.GET("/memberclass/:id", controller.GetMemberClass)
@@ -58,7 +51,7 @@ func main() {
 	}
 
 	//Signup User Route
-	r.POST("/signup", controller.CreateEmployee)
+	r.POST("/signup", controller.CreateLoginUser)
 	// login User Route
 	r.POST("/login", controller.Login)
 

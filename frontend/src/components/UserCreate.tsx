@@ -122,6 +122,9 @@ function UserCreate() {
     let val = typeof data === "string" ? parseInt(data) : data;
     return val;
   };
+
+
+  
   async function submit() {
     let data = {
       EmployeeID: convertType(localStorage.getItem("uid") as string),
@@ -403,6 +406,29 @@ function UserCreate() {
                 value={user?.Address || ""}
                 onChange={handleInputChange}
               />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}>
+            <FormControl fullWidth variant="outlined">
+              <p>จังหวัด</p>
+              <Select
+                native
+                value={user?.ProvinceID + ""}
+                onChange={handleChange}
+                inputProps={{
+                  name: "ProvinceID",
+                }}
+              >
+                <option aria-label="None" value="">
+                  กรุณาเลือกจังหวัด
+                </option>
+                {provinces.map((item: ProvincesInterface) => (
+                  <option value={item.ID} key={item.ID}>
+                    {item.Name}
+                  </option>
+                ))}
+              </Select>
             </FormControl>
           </Grid>
 

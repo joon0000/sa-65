@@ -11,7 +11,6 @@ import (
 // POST /users
 func CreateUser(c *gin.Context) {
 	var user entity.User
-	var employee entity.Employee
 	var memberclass entity.MemberClass
 	var province entity.Province
 	var role entity.Role
@@ -22,19 +21,13 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	// 9: ค้นหา employee ด้วย id
-	if tx := entity.DB().Where("id = ?", user.EmployeeID).First(&employee); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "employee not found"})
-		return
-	}
-
-	// 10: ค้นหา member ด้วย id
+	// 9: ค้นหา member ด้วย id
 	if tx := entity.DB().Where("id = ?", user.MemberClassID).First(&memberclass); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "memberclass not found"})
 		return
 	}
 
-	// 11: ค้นหา province ด้วย id
+	// 10: ค้นหา province ด้วย id
 	if tx := entity.DB().Where("id = ?", user.ProvinceID).First(&province); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "province not found"})
 		return
@@ -57,7 +50,6 @@ func CreateUser(c *gin.Context) {
 
 	// 12: สร้าง user
 	us := entity.User{
-		Employee:    employee,
 		MemberClass: memberclass,
 		Province:    province,
 		Role:        role,

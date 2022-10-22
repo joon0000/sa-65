@@ -31,20 +31,20 @@ type LoginResponse struct {
 // POST /login
 func Login(c *gin.Context) {
 	var payload LoginPayload
-	var emp entity.Employee
+	var us entity.User
 
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ค้นหา user ด้วย email ที่ผู้ใช้กรอกเข้ามา
-	if err := entity.DB().Raw("SELECT * FROM employees WHERE email = ?", payload.Email).Scan(&emp).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM users WHERE email = ?", payload.Email).Scan(&us).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(emp.Password), []byte(payload.Password))
+	err := bcrypt.CompareHashAndPassword([]byte(us.Password), []byte(payload.Password))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "password is incerrect"})
 		return
@@ -61,7 +61,7 @@ func Login(c *gin.Context) {
 		ExpirationHours: 24,
 	}
 
-	signedToken, err := jwtWrapper.GenerateToken(emp.Email)
+	signedToken, err := jwtWrapper.GenerateToken(us.Email)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
@@ -69,16 +69,16 @@ func Login(c *gin.Context) {
 
 	tokenResponse := LoginResponse{
 		Token: signedToken,
-		ID:    emp.ID,
+		ID:    us.ID,
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
 
 // POST /create
-func CreateEmployee(c *gin.Context) {
+func CreateLoginUser(c *gin.Context) {
 	var payload SignUpPayload
-	var emp entity.Employee
+	var us entity.User
 
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -92,14 +92,14 @@ func CreateEmployee(c *gin.Context) {
 		return
 	}
 
-	emp.Name = payload.Name
-	emp.Email = payload.Email
-	emp.Password = string(hashPassword)
+	us.FirstName = payload.Name
+	us.Email = payload.Email
+	us.Password = string(hashPassword)
 
-	if err := entity.DB().Create(&emp).Error; err != nil {
+	if err := entity.DB().Create(&us).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"data": emp})
+	c.JSON(http.StatusCreated, gin.H{"data": us})
 }
