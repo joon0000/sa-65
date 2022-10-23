@@ -152,12 +152,13 @@ func SetupDatabase() {
 		MemberClass: plat,
 	})
 
-	test := GetRoleName(1)
-	fmt.Printf("User id 1: %s\n", test)
-	test2 := GetRoleName(2)
-	fmt.Printf("User id 2: %s\n", test2)
-	test3 := GetRoleName(3)
-	fmt.Printf("User id 3: %s\n", test3)
+	/* 	test := GetRoleName(1)
+	   	fmt.Printf("User id 1: %s\n", test)
+	   	test2 := GetRoleName(2)
+	   	fmt.Printf("User id 2: %s\n", test2)
+	   	test3 := GetRoleName(3)
+	   	fmt.Printf("User id 3: %s\n", test3) */
+	GetClass(1)
 
 }
 func GetRoleName(id uint) string {
@@ -171,4 +172,14 @@ func GetRoleName(id uint) string {
 		return "user"
 	}
 	return "err"
+}
+
+func GetClass(id uint) {
+	class := MemberClass{}
+	tx := db.Preload("User").First(&class, id)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+	}
+	fmt.Println(class)
+	fmt.Println("ss")
 }

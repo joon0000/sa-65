@@ -88,7 +88,7 @@ func Login(c *gin.Context) {
 
 func GetRoleName(id uint) string {
 	rn := entity.User{}
-	tx := entity.DB().Preload("Role").First(&rn, id)
+	tx := entity.DB().Preload("Role").First(&rn, id)  //
 	if tx.Error != nil {
 		return "Role not found"
 	} else if rn.Role.Name == "Employee" {

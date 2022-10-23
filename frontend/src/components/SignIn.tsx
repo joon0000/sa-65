@@ -54,7 +54,7 @@ function SignIn() {
     if (res) {
       setSuccess(true);
       setTimeout(() => {
-        //window.location.reload();
+        window.location.reload();
       }, 1000);
     } else {
       setError(true);

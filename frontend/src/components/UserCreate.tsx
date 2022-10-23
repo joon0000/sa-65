@@ -70,6 +70,7 @@ function UserCreate() {
     setUser({ ...user, [id]: value });
   };
   
+
   const getProvinces = async () => {
     let res = await GetProvinces();
     if (res) {
@@ -195,7 +196,7 @@ function UserCreate() {
           </Grid>
 
           <Grid item xs={6}>
-            <p>รหัสนักศึกษา/อาจารย์</p>
+            <p>รหัสนักศึกษา/อาจารย์/พนักงาน</p>
             <FormControl fullWidth variant="outlined">
               <TextField
                 id="Pin"
@@ -205,6 +206,7 @@ function UserCreate() {
                 placeholder="กรุณากรอกชื่อรหัสนักศึกษา/อาจารย์"
                 value={user?.Pin || ""}
                 onChange={handleInputChange}
+                inputProps={{maxLength :8}}
               />
             </FormControl>
           </Grid>
@@ -215,11 +217,18 @@ function UserCreate() {
               <TextField
                 id="Civ"
                 variant="outlined"
+                //inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 type="string"
                 size="medium"
                 placeholder="กรุณากรอกเลขบัตรประชาชน"
                 value={user?.Civ || ""}
                 onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (!/[0-9]/.test(e.key)){
+                    e.preventDefault()
+                  }
+                }}
+                inputProps={{maxLength :13}}
               />
             </FormControl>
           </Grid>
@@ -235,6 +244,12 @@ function UserCreate() {
                 placeholder="กรุณากรอกเบอร์โทรศัพท์"
                 value={user?.Phone || ""}
                 onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (!/[0-9]/.test(e.key)){
+                    e.preventDefault()
+                  }
+                }}
+                inputProps={{maxLength :10}}
               />
             </FormControl>
           </Grid>
