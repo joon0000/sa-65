@@ -4,6 +4,8 @@ import (
 	//"fmt"
 	//"time"
 
+	"fmt"
+
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -32,6 +34,7 @@ func SetupDatabase() {
 	db = database
 
 	password1, err := bcrypt.GenerateFromPassword([]byte("zaq1@wsX"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 	password3, err := bcrypt.GenerateFromPassword([]byte("1111111111111"), 14)
 
 	//add example data
@@ -133,4 +136,39 @@ func SetupDatabase() {
 		Province:    bangkok,
 		MemberClass: plat,
 	})
+
+	db.Model(&User{}).Create(&User{
+		Pin:       "T654321",
+		FirstName: "Wichai",
+		LastName:  "Micro",
+		Civ:       "3210987654321",
+		Phone:     "0823456789",
+		Email:     "wichai@mail.com",
+		Password:  string(password2),
+		Address:   "ถนน c อำเภอ z",
+		//FK
+		Role:        teacher,
+		Province:    bangkok,
+		MemberClass: plat,
+	})
+
+	test := GetRoleName(1)
+	fmt.Printf("User id 1: %s\n", test)
+	test2 := GetRoleName(2)
+	fmt.Printf("User id 2: %s\n", test2)
+	test3 := GetRoleName(3)
+	fmt.Printf("User id 3: %s\n", test3)
+
+}
+func GetRoleName(id uint) string {
+	rn := User{}
+	tx := db.Preload("Role").First(&rn, id)
+	if tx.Error != nil {
+		return "Role not found"
+	} else if rn.Role.Name == "Employee" {
+		return "admin"
+	} else if rn.Role.Name == "Student" || rn.Role.Name == "Teacher" {
+		return "user"
+	}
+	return "err"
 }

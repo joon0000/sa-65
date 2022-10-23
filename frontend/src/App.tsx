@@ -85,12 +85,13 @@ const mdTheme = createTheme();
 
 const menu = [
   { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-  { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" },
+  { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" ,role : "admin"},
  // { name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" },
 ];
 
 function App() {
   const [token, setToken] = useState<String>("");
+  const [role, setRole] = useState<String | null>();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -98,8 +99,10 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
     if (token) {
       setToken(token);
+      setRole(role);
     }
   }, []);
 
@@ -165,6 +168,7 @@ function App() {
             <Divider />
             <List>
               {menu.map((item, index) => (
+                role === item.role &&
                 <Link
                   to={item.path}
                   key={item.name}

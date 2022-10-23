@@ -24,6 +24,7 @@ type SignUpPayload struct {
 
 // LoginResponse token response
 type LoginResponse struct {
+	Role  string `json:"role"`
 	Token string `json:"token"`
 	ID    uint   `json:"id"`
 }
@@ -68,11 +69,34 @@ func Login(c *gin.Context) {
 	}
 
 	tokenResponse := LoginResponse{
+		Role:  GetRoleName(us.ID),
 		Token: signedToken,
 		ID:    us.ID,
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
+}
+
+/* func GetRoleName(id uint) string {
+	rn := entity.User{}
+	tx := entity.DB().Preload("Role").First(&rn, id)
+	if tx.Error != nil {
+		return "err"
+	}
+	return rn.Role.Name
+} */
+
+func GetRoleName(id uint) string {
+	rn := entity.User{}
+	tx := entity.DB().Preload("Role").First(&rn, id)
+	if tx.Error != nil {
+		return "Role not found"
+	} else if rn.Role.Name == "Employee" {
+		return "admin"
+	} else if rn.Role.Name == "Student" || rn.Role.Name == "Teacher" {
+		return "user"
+	}
+	return "err"
 }
 
 // POST /create

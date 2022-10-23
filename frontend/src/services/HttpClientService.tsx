@@ -15,8 +15,11 @@ async function Login(data: SigninInterface) {
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
+        console.log(res.data);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("uid", res.data.id);
+        // เก็บข้อมูล role ที่ login เข้ามา
+        localStorage.setItem("role", res.data.role);
         return res.data;
       } else {
         return false;
