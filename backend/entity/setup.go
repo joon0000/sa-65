@@ -158,7 +158,11 @@ func SetupDatabase() {
 	   	fmt.Printf("User id 2: %s\n", test2)
 	   	test3 := GetRoleName(3)
 	   	fmt.Printf("User id 3: %s\n", test3) */
-	GetClass(1)
+	// GetClass(3)
+	//GetClassStruct(4)
+	GetClassStruct2(1)
+	GetClassStruct2(2)
+	GetClassStruct2(3)
 
 }
 func GetRoleName(id uint) string {
@@ -175,11 +179,34 @@ func GetRoleName(id uint) string {
 }
 
 func GetClass(id uint) {
-	class := MemberClass{}
-	tx := db.Preload("User").First(&class, id)
+	us := User{}
+	tx := db.Preload("MemberClass").First(&us, id)
 	if tx.Error != nil {
 		fmt.Println(tx.Error)
 	}
-	fmt.Println(class)
-	fmt.Println("ss")
+
+	//fmt.Println(us.MemberClass.ID)
+}
+
+/* func GetClassStruct(id uint) {
+	mb := []MemberClass{}
+	tx := db.Preload("MemberClass").First(&mb, id)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+	}
+	fmt.Println(mb)
+} */
+
+func GetClassStruct2(id uint){
+	us := User{}
+	mb := []MemberClass{}
+	tx := db.Preload("MemberClass").First(&us, id)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+	}
+	er := db.Order("id").First(&mb, "id=?", us.MemberClass.ID)
+	if er.Error != nil {
+		fmt.Println(tx.Error)
+	}
+	return 
 }
