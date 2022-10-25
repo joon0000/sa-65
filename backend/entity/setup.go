@@ -33,9 +33,9 @@ func SetupDatabase() {
 
 	db = database
 
-	password1, err := bcrypt.GenerateFromPassword([]byte("zaq1@wsX"), 14)
+	password1, err := bcrypt.GenerateFromPassword([]byte("1111111111111"), 14)
 	password2, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
-	password3, err := bcrypt.GenerateFromPassword([]byte("1111111111111"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("3333333333333"), 14)
 
 	//add example data
 
@@ -114,7 +114,7 @@ func SetupDatabase() {
 		Civ:       "1111111111111",
 		Phone:     "0811111111",
 		Email:     "preechapat@mail.com",
-		Password:  string(password3),
+		Password:  string(password1),
 		Address:   "ถนน a อำเภอ v",
 		//FK
 		Role:        student,
@@ -124,28 +124,28 @@ func SetupDatabase() {
 
 	db.Model(&User{}).Create(&User{
 		Pin:       "E123456",
-		FirstName: "Sirinya",
-		LastName:  "kot",
+		FirstName: "kawin",
+		LastName:  "l.",
 		Civ:       "1234567890123",
 		Phone:     "0899999999",
-		Email:     "sirinya@mail.com",
-		Password:  string(password1),
-		Address:   "ถนน c อำเภอ z",
+		Email:     "kawin@mail.com",
+		Password:  string(password2),
+		Address:   "หอ b อำเภอ r",
 		//FK
 		Role:        employee,
-		Province:    bangkok,
-		MemberClass: plat,
+		Province:    chon,
+		MemberClass: silver,
 	})
 
 	db.Model(&User{}).Create(&User{
-		Pin:       "T654321",
-		FirstName: "Wichai",
-		LastName:  "Micro",
-		Civ:       "3210987654321",
+		Pin:       "T8888",
+		FirstName: "sirinya",
+		LastName:  "kotpanya",
+		Civ:       "3333333333333",
 		Phone:     "0823456789",
-		Email:     "wichai@mail.com",
-		Password:  string(password2),
-		Address:   "ถนน c อำเภอ z",
+		Email:     "sirinya@mail.com",
+		Password:  string(password3),
+		Address:   "บ้าน c อำเภอ q",
 		//FK
 		Role:        teacher,
 		Province:    bangkok,
@@ -197,7 +197,7 @@ func GetClass(id uint) {
 	fmt.Println(mb)
 } */
 
-func GetClassStruct2(id uint){
+func GetClassStruct2(id uint) {
 	us := User{}
 	mb := []MemberClass{}
 	tx := db.Preload("MemberClass").First(&us, id)
@@ -208,5 +208,5 @@ func GetClassStruct2(id uint){
 	if er.Error != nil {
 		fmt.Println(tx.Error)
 	}
-	return 
+	return
 }

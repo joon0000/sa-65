@@ -20,8 +20,8 @@ import Button from "@mui/material/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+// import YouTubeIcon from "@mui/icons-material/YouTube";
+// import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 import Home from "./components/Home";
 import Users from "./components/Users";
@@ -84,7 +84,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const menu = [
-  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
+  { name: "หน้าแรก", icon: <HomeIcon />, path: "/" ,role : "admin" },
   { name: "สมาชิก", icon: <PeopleIcon />, path: "/users" ,role : "admin"},
  // { name: "จองห้องค้นคว้า", icon: <MeetingRoomIcon />, path: "/researchroomreservationrecords" },
 ];
